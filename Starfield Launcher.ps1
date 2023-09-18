@@ -72,7 +72,7 @@ $runProc = Get-Process $curName
 $befAffinity = $runProc.ProcessorAffinity
 $aftAffinity = $befAffinity
 
-While ($befAffinity -ne ($aftAffinity + $affOffset)) {
+While ($befAffinity -ne ($aftAffinity + $affOffset) -and ($count -lt 4)) {
     Write-Output "Reducing affinity by '$affOffset'"
     $runProc.ProcessorAffinity=($runProc.ProcessorAffinity - $affOffset)
 
