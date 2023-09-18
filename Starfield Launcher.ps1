@@ -4,7 +4,8 @@
     #Contents of sample settings file.
     $sample = @(
         [pscustomobject]@{Setting="Game"; Value="Starfield"},
-        [pscustomobject]@{Setting="Affinity"; Value="111"}
+        [pscustomobject]@{Setting="Affinity"; Value="111"},
+		[pscustomobject]@{Setting="Priority"; Value="Normal"}
     )
     
     #Write out sample, opens location where example was written   
@@ -15,13 +16,17 @@
 } else {
     Write-Output "Settings file found, continuing exection"
     $settings = Import-CSV .\SLSettings.csv
+	if (-not ($settings[Priority])){
+		Write-Output "SLSettings.csv does not support priority mode, adjusting to default settings"
+		$settings[Priority] = "Normal"		
+		$settings | Export-CSV -Path .\SLSettings.csv -NoTypeInformation
+	}
 }
-
 
 #Baseline Values
 $gameName = $settings[0].Value
 $affOffset = [Convert]::ToInt32($settings[1].Value,2)
-
+$targetPrio = $settings[2].Value
 
 $method = 0
 if (Test-Path ".\$gameName.exe"){
@@ -72,7 +77,7 @@ $runProc = Get-Process $curName
 $befAffinity = $runProc.ProcessorAffinity
 $aftAffinity = $befAffinity
 
-While ($befAffinity -ne ($aftAffinity + $affOffset)) {
+While ($befAffinity -ne ($aftAffinity + $affOffset) -or ($count -gt 4)) {
     Write-Output "Reducing affinity by '$affOffset'"
     $runProc.ProcessorAffinity=($runProc.ProcessorAffinity - $affOffset)
 
@@ -82,17 +87,36 @@ While ($befAffinity -ne ($aftAffinity + $affOffset)) {
     $count ++
 }
 
-if ($count > 4){
+if ($count -gt 4){
     Write-Output "Affinity set failed, check administrator mode or try again"
-} else if ($count = 0) {
-	Write-Output "Affinity not changed"
+} else if ($count -eq 0) {
+	Write-Output "Affinity already correct, no change"
 } else {
-    Write-Output "Affinity set correctly"
+    Write-Output "Affinity set correctly after $count attempts"
+}
+
+Write-Output "Current priority $($runProc.PriorityClass), target priority $($settings[2].Value)"
+
+While (($runProc.PriorityClass -ne $targetPrio) -and ($count -lt 4) -and ($settings[2].value -ne $null)) {
+	Write-Output "Setting priority to 'Normal'"
+	$runProc.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::$targetPrio
+
+	Start-Sleep -s 5
+	Write-Output "Current priority $($runProc.PriorityClass), target priority $targetPrio"
+	$count ++
+}
+
+if ($count -gt 4){
+	Write-Output "Priority set failed, check administrator mode or try again"
+} else if ($count -eq 0) {
+	Write-Output "Priority already correct, no change"
+} else {
+	Write-Output "Priority set correctly after $count attempts"
 }
 
 Start-Sleep -s 5
 
-Write-Output "Success! closing in 10s"
+Write-Output "Complete, closing in 10s"
 Start-Sleep -s 10
 
 exit
