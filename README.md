@@ -18,8 +18,7 @@ As with all my scripts, this is provided AS-IS with no plans for future addition
     <li>Read the number of logical processors</li>
     <li>I disable around 1/4 of them, for example if you have 16 logical processors, I disable 4</li>
     <li>Type 1s and 0s where 1 disables a core, and 0 leaves it for starfield.</li>
-    <li>In the following example, I disable the first 4 of the 16 available logical processors</li>
-    <li>HIGH CORE NUMBER       LOW CORE NUMBER</li>
+    <li>In the following example, I disable the <u>first 4</u> of the 16 available logical processors</li>
     <li>"Affinity","0000000000001111"
     <li>Any leading 0s can be dropped by default. Default settings will disable 3 cores</li>
   </ul>
