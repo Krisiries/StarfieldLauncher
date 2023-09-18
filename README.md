@@ -11,7 +11,7 @@ As with all my scripts, this is provided AS-IS with no plans for future addition
   <li>Run the script or exe the initial settings file <b>as administrator</b></li>
   <li>If the script cannot find your starfield install, it will prompt you to move it to the install folder</li>
   <li>If you wish to change from the default settings, open the csv created in notepad and change "111" as covered below in the example. <b>1 means Starfield cannot access a core, 0 means Starfield can</b></li>
-  <ol>
+  <ul>
     <li>Example:</li>
     <li>Open task manager</li>
     <li>Go to the Performance tab</li>
@@ -22,7 +22,7 @@ As with all my scripts, this is provided AS-IS with no plans for future addition
     <li>HIGH CORE NUMBER       LOW CORE NUMBER</li>
     <li>"Affinity","0000000000001111"
     <li>Any leading 0s can be dropped by default. Default settings will disable 3 cores</li>
-  </ol>
+  </ul>
 </ol>
 
 # Subsequent Launch
