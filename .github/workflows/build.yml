@@ -2,7 +2,7 @@
 
 name: PS2Exe
 
-run-name: ${{ github.actor }} is building Multilauncher
+run-name: ${{ github.actor }} is building Starfield Launcher
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -34,9 +34,9 @@ jobs:
       - name: Build Exe File
         shell: powershell
         run: |
-          ps2exe MultiLauncher.ps1 .\
+          ps2exe "Starfield Launcher.ps1" .\
 
       - uses: actions/upload-artifact@v3
         with:
-            name: MultiLauncher
-            path: MultiLauncher.exe   
+            name: Starfield Launcher
+            path: Starfield Launcher.exe   
