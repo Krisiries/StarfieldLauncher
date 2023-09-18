@@ -1,7 +1,7 @@
 # Starfield Launcher
 Simple PowerShell-based helper program to disallow starfield from using every CPU core.
 
-As with all my scripts, this is provided AS-IS with no plans for future additions.
+As with all my scripts, this is provided AS-IS with no plans for future additions. <br />
 <a href="https://github.com/Krisiries/StarfieldLauncher/suites/16265692292/artifacts/928622848">Current download - Windows</a>
 
 # First Time Setup
