@@ -84,7 +84,7 @@ While ($befAffinity -ne ($aftAffinity + $affOffset) -and ($count -lt 4)) {
 
 if ($count > 4){
     Write-Output "Affinity set failed, check administrator mode or try again"
-} else if ($count = 0) {
+} elseif ($count = 0) {
 	Write-Output "Affinity not changed"
 } else {
     Write-Output "Affinity set correctly"
