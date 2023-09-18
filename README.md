@@ -37,6 +37,7 @@ You can redirect the Starfield shortcut to the exe, if you do, the settings will
   <li>help fix system stuttering with starfield in certain scenarios</li>
   <li>allow customization for other games, no support will be provided</li>
 </ul>
+
 ## This launcher does not...:
 <ul>
   <li>change anything about starfield's own code</li>
